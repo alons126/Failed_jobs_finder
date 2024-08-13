@@ -63,11 +63,14 @@ def find_unmatched_scripts(output_txt):
             unmatched_sh_files.append(sh_file)
 
     # Write unmatched .sh files to the output .txt file
-    with open(dir + output_txt, 'w') as file:
+    with open(output_txt, 'w') as file:
+        # with open(dir + output_txt, 'w') as file:
         file.write('<parallel>\n')
         for sh_file in unmatched_sh_files:
             file.write(prefix + sh_file + '\n')
         file.write('</parallel>\n')
+
+    os.system("cp " + output_txt + " " + dir + output_txt)
 
     print("Expected Number of '.gst.root' and '.sh' files: " + str(len(sh_files) * 2))
     print("Number of unmatched '.sh' files: " + str(len(unmatched_sh_files)))
