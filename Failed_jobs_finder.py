@@ -4,13 +4,13 @@ import os
 def find_unmatched_scripts(output_txt):
     PrinOut = False
 
-    dir = "/pnfs/genie/scratch/users/asportes/2N_Analysis_Samples/Ar40/G18_10a_00_000/402962MeV/"
-    list_file = "list.txt"
-    os.system("ls " + dir + "master-routine_validation_01-eScattering >" + dir + list_file)
+    dir = os.system("$PyDir")
+    list_file = os.system("List_File")
+    # os.system("ls " + dir + "master-routine_validation_01-eScattering >" + dir + list_file)
     # os.system("ls -1 . >" + list_file)
 
     # Obtain prefix
-    with open(dir + "grid_submission.xml", 'r') as xml_file:
+    with open(dir + "/grid_submission.xml", 'r') as xml_file:
         for xml_line in xml_file:
             if "<parallel>" not in xml_line:
                 prefix_index = xml_line.rfind('/')
@@ -24,7 +24,7 @@ def find_unmatched_scripts(output_txt):
     sh_files = []
 
     # Read the input .txt file
-    with open(dir + list_file, 'r') as file:
+    with open(dir + "/" + list_file, 'r') as file:
         # with open(input_txt, 'r') as file:
         for line in file:
             line = line.strip()
@@ -64,13 +64,12 @@ def find_unmatched_scripts(output_txt):
 
     # Write unmatched .sh files to the output .txt file
     with open(output_txt, 'w') as file:
-        # with open(dir + output_txt, 'w') as file:
         file.write('<parallel>\n')
         for sh_file in unmatched_sh_files:
             file.write(prefix + sh_file + '\n')
         file.write('</parallel>\n')
 
-    os.system("cp " + output_txt + " " + dir + output_txt)
+    os.system("cp " + output_txt + " " + dir + "/" + output_txt)
 
     print("Expected Number of '.gst.root' and '.sh' files: " + str(len(sh_files) * 2))
     print("Number of unmatched '.sh' files: " + str(len(unmatched_sh_files)))
