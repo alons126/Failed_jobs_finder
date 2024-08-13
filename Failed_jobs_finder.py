@@ -2,7 +2,7 @@ import os
 
 
 def find_unmatched_scripts(output_txt):
-    PrinOut = false
+    PrinOut = False
 
     dir = "/pnfs/genie/scratch/users/asportes/2N_Analysis_Samples/Ar40/G18_10a_00_000/402962MeV/"
     list_file = "list.txt"
