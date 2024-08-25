@@ -1,18 +1,18 @@
 import os
 
 
-def find_unmatched_scripts(prefix, input_txt, output_txt, false=None):
-    PrinOut = false
+def find_unmatched_scripts(output_txt):
+    PrinOut = False
 
     list_file = "list.txt"
-    os.system("ls -1 . >" + list_file)
+    # os.system("ls -1 . >" + list_file)
 
     # Obtain prefix
-    with open("grid_submission.xml", 'r') as xml_file:
+    with open("grid_submission_1.xml", 'r') as xml_file:
         for xml_line in xml_file:
             if "<parallel>" not in xml_line:
                 prefix_index = xml_line.rfind('/')
-                prefix0 = xml_line[:prefix_index] + "/"
+                prefix = xml_line[:prefix_index] + "/"
                 break
 
     xml_file.close()
@@ -26,7 +26,8 @@ def find_unmatched_scripts(prefix, input_txt, output_txt, false=None):
     # with open(input_txt, 'r') as file:
         for line in file:
             line = line.strip()
-            if line.endswith('.gst.root'):
+            if line.endswith('.gst.root') or line.endswith('.xml'):
+            # if line.endswith('.gst.root'):
                 gst_root_files.append(line)
             elif line.endswith('.sh'):
                 sh_files.append(line)
@@ -72,6 +73,5 @@ def find_unmatched_scripts(prefix, input_txt, output_txt, false=None):
 
 
 if __name__ == "__main__":
-    input_txt = "input.txt"  # List of files in master-routine_validation_01-eScattering
     output_txt = "grid_submission.xml"  # output .xml file
-    find_unmatched_scripts(prefix, input_txt, output_txt)
+    find_unmatched_scripts(output_txt)
