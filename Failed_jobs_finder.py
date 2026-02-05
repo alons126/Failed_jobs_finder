@@ -4,8 +4,10 @@ import os
 def find_unmatched_scripts(output_txt):
     PrinOut = False
 
-    dir = os.getenv("PyDir")
-    list_file = os.getenv("List_File")
+    dir = "/Users/alon/Downloads"
+    # dir = os.getenv("PyDir")
+    list_file = "list.txt"
+    # list_file = os.getenv("List_File")
     # os.system("ls " + dir + "master-routine_validation_01-eScattering >" + dir + list_file)
     # os.system("ls -1 . >" + list_file)
 
